@@ -3,6 +3,9 @@ name: cache money
 on:
   workflow_dispatch:
 
+env:
+  ACTIONS_CACHE_SERVICE_V2: 'v1'
+
 jobs:
   tiny:
     runs-on: depot-ubuntu-22.04
