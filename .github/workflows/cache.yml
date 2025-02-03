@@ -1,0 +1,32 @@
+
+name: cache money
+on:
+  workflow_dispatch:
+
+jobs:
+  tiny:
+    runs-on: depot-ubuntu-22.04
+    strategy:
+      matrix:
+        i: [1,2,3,4,5]
+    steps:
+    - run: |
+        dd if=/dev/urandom of=tiny-random bs=1M count=10
+    - uses: actions/cache@v4
+      name: "Upload tiny Cache"
+      with:
+        path: tiny-random
+        key: tiny-random-${{ matrix.i }}
+  big:
+    runs-on: depot-ubuntu-22.04
+    strategy:
+      matrix:
+        i: [1,2,3,4,5]
+    steps:
+    - run: |
+        dd if=/dev/urandom of=2gb-random bs=1M count=2000
+    - uses: actions/cache@v4
+      name: "Upload 2GB Cache"
+      with:
+        path: 2gb-random
+        key: 2gb-random-${{ matrix.i }}
